@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Customer Service Chatbot</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>AI Customer Service Chatbot</h1>
+    <div id="chat">
+        <div id="messages"></div>
+        <input type="text" id="user_input" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+    <script>
+        function sendMessage() {
+            let message = $("#user_input").val();
+            $.post("/chat", { message: message }, function(data) {
+                $("#messages").append("<p><strong>You:</strong> " + message + "</p>");
+                $("#messages").append("<p><strong>Chatbot:</strong> " + data.response + "</p>");
+                $("#user_input").val("");
+            });
+        }
+    </script>
+</body>
+</html>
